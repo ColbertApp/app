@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:showIn="navigation_view">
+
+    <item android:title="Récent">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_fb"
+                    android:icon="@drawable/ic_facebook"
+                    android:title="Posts Facebook"/>
+                <item
+                    android:id="@+id/nav_mdl"
+                    android:icon="@drawable/ic_home"
+                    android:title="Maison des Lycéens"/>
+                <item
+                    android:id="@+id/nav_site"
+                    android:icon="@drawable/ic_link"
+                    android:title="Site du lycée"/>
+            </group>
+        </menu>
+    </item>
+    <item android:title="Pronote">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_login"
+                    android:icon="@drawable/ic_person"
+                    android:title="Connexion"/>
+            </group>
+        </menu>
+    </item>
+    <item android:title="Vie lycéenne">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_files"
+                    android:icon="@drawable/ic_folder"
+                    android:title="Fichiers"/>
+                <item
+                    android:id="@+id/nav_menu"
+                    android:icon="@drawable/ic_restaurant_menu"
+                    android:title="Menu de la cantine"/>
+            </group>
+        </menu>
+    </item>
+</menu>
