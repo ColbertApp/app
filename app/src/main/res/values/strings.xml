@@ -4,7 +4,7 @@
     <string name="navigation_drawer_open">Ouvrir le menu</string>
     <string name="navigation_drawer_close">Fermer le menu</string>
 
-    <string name="action_settings">Paramètres</string>
+    <string name="action_refresh">Actualiser</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

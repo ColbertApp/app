@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "406947845738",
+    "firebase_url": "https://colbert-app.firebaseio.com",
+    "project_id": "colbert-app",
+    "storage_bucket": "colbert-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:406947845738:android:0f334e623fe666aa",
+        "android_client_info": {
+          "package_name": "me.fliife.colbert"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "406947845738-lqasfsf0hcl7ta6trclk70f4341ol7u7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "me.fliife.colbert",
+            "certificate_hash": "7f5be5f2796c31eee7cbb8cf3cd8b83cb08a2145"
+          }
+        },
+        {
+          "client_id": "406947845738-h6pta0i5962grgnp0t8aq8jai539gpsf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAgte-6VPT9UxrcL6c5UH5v3RHD7f9RFXc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "406947845738-h6pta0i5962grgnp0t8aq8jai539gpsf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

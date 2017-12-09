@@ -28,6 +28,18 @@
                     android:id="@+id/nav_login"
                     android:icon="@drawable/ic_person"
                     android:title="Connexion"/>
+                <item
+                    android:id="@+id/nav_taf"
+                    android:icon="@drawable/ic_assignment"
+                    android:title="Travail à faire"/>
+                <item
+                    android:id="@+id/nav_edt"
+                    android:icon="@drawable/ic_date_range"
+                    android:title="Emploi du temps"/>
+                <item
+                    android:id="@+id/nav_marks"
+                    android:icon="@drawable/ic_assignment_turned_in"
+                    android:title="Notes"/>
             </group>
         </menu>
     </item>

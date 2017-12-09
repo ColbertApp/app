@@ -1,0 +1,18 @@
+[
+  {
+    "outputType": {
+      "type": "APK"
+    },
+    "apkInfo": {
+      "type": "MAIN",
+      "splits": [],
+      "versionCode": 5
+    },
+    "path": "app-release.apk",
+    "properties": {
+      "packageId": "me.fliife.colbert",
+      "split": "",
+      "minSdkVersion": "15"
+    }
+  }
+]

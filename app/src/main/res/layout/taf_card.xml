@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/taf_cardview"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentStart="true"
+    android:layout_below="@+id/sched_subheader"
+    android:clickable="true"
+    android:elevation="2dp"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackground"
+    android:stateListAnimator="@animator/touch_rise_item"
+    app:contentPadding="16dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/taf_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/taf_space"
+            android:focusable="true"
+            android:gravity="start"
+            android:textAlignment="viewStart"
+            tools:text="Sur l'une des oeuvres à lire de façon personnelle: rédigez une fiche de présentation puis sélectionnez un passage qui vous a particulièrement marqué. Délimitez le clairement pour les camarades. Présentez l'extrait: contexte et contenu. Expliquez en quoi cet extrait vous a particulièrement frappé. Ce serait bien de le faire sur ordinateur pour une présentation orale."/>
+
+        <RelativeLayout
+            android:id="@+id/taf_sub_rl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/taf_date"
+            android:layout_toStartOf="@+id/taf_date">
+
+            <TextView
+                android:id="@+id/taf_subject"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                tools:text="FRANCAIS"/>
+        </RelativeLayout>
+
+        <Space
+            android:id="@+id/taf_space"
+            android:layout_width="match_parent"
+            android:layout_height="16dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/taf_sub_rl"/>
+
+        <TextView
+            android:id="@+id/taf_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/taf_space"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:gravity="center_vertical"
+            android:textAlignment="center"
+            android:textStyle="normal|italic"
+            tools:text="04/11/16"/>
+
+        <TextView
+            android:id="@+id/taf_dm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/taf_content"
+            android:text="À rendre au format papier"
+            android:textColor="@android:color/holo_red_light"
+            android:visibility="gone"/>
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>
+
