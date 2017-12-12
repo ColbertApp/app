@@ -1,6 +1,7 @@
 package me.fliife.colbert.ui.fragments;
 
 
+import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -23,9 +24,6 @@ import com.owncloud.android.lib.resources.files.ReadRemoteFolderOperation;
 import me.fliife.colbert.R;
 import me.fliife.colbert.storage.StorageUtils;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class OwnCloudLoginFragment extends Fragment implements OnRemoteOperationListener {
 
     private TextView error;
@@ -33,6 +31,7 @@ public class OwnCloudLoginFragment extends Fragment implements OnRemoteOperation
     private EditText username, password;
     private ProgressBar pb;
     private String user, pass;
+    OnOwnCloudSuccess listener;
 
     public OwnCloudLoginFragment() {
         // Required empty public constructor
@@ -79,6 +78,7 @@ public class OwnCloudLoginFragment extends Fragment implements OnRemoteOperation
     public void onRemoteOperationFinish(RemoteOperation remoteOperation, RemoteOperationResult remoteOperationResult) {
         if(remoteOperationResult.isSuccess()) {
             StorageUtils.saveOwnCloudCredentials(getContext().getApplicationContext(), user, pass);
+            listener.onOwnCloudLogin();
         } else {
             login.setEnabled(true);
             pb.setVisibility(View.GONE);
@@ -86,5 +86,19 @@ public class OwnCloudLoginFragment extends Fragment implements OnRemoteOperation
             password.setEnabled(true);
             error.setVisibility(View.VISIBLE);
         }
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            listener = (OnOwnCloudSuccess) context;
+        } catch (ClassCastException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public interface OnOwnCloudSuccess {
+        void onOwnCloudLogin();
     }
 }

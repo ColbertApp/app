@@ -36,7 +36,7 @@ import static me.fliife.colbert.utils.PronoteService.SERVICE_ACTION_FETCH;
 import static me.fliife.colbert.utils.PronoteService.SERVICE_ACTION_GET_FROM_DATABASE;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, PronoteLoginFragment.OnLoginSuccess {
+        implements NavigationView.OnNavigationItemSelectedListener, PronoteLoginFragment.OnLoginSuccess, OwnCloudLoginFragment.OnOwnCloudSuccess {
 
     public API api;
     public Snackbar loadingSnackBar;
@@ -173,11 +173,20 @@ public class MainActivity extends AppCompatActivity
         menu.findItem(R.id.action_refresh).setVisible(false);
     }
 
+    public void showLogoutButton() {
+        menu.findItem(R.id.action_logout).setVisible(true);
+    }
+
+    public void hideLogoutButton() {
+        menu.findItem(R.id.action_logout).setVisible(false);
+    }
+
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         hideRefreshButton();
+        hideLogoutButton();
 
         Fragment fragment;
 
@@ -187,12 +196,15 @@ public class MainActivity extends AppCompatActivity
             fragment = new MDLFragment();
         } else if (id == R.id.nav_taf) {
             showRefreshButton();
+            showLogoutButton();
             fragment = new TafFragment();
         } else if (id == R.id.nav_marks) {
             showRefreshButton();
+            showLogoutButton();
             fragment = new AvgFragment();
         } else if (id == R.id.nav_edt) {
             showRefreshButton();
+            showLogoutButton();
             fragment = new EdtFragment();
         } else if (id == R.id.nav_login) {
             fragment = new PronoteLoginFragment();
@@ -201,6 +213,7 @@ public class MainActivity extends AppCompatActivity
             if(StorageUtils.getOwnCloudCredentials(this).getUsername().equals("")) {
                 fragment = new OwnCloudLoginFragment();
             } else {
+                showLogoutButton();
                 fragment = new OwnCloudFragment();
             }
         } else if (id == R.id.nav_menu) {
@@ -221,7 +234,10 @@ public class MainActivity extends AppCompatActivity
 
         getSupportActionBar().setTitle(item.getTitle());
 
-        if (id != R.id.nav_fb) navigationView.getMenu().findItem(R.id.nav_fb).setChecked(false);
+        int[] ids = {R.id.nav_files, R.id.nav_edt, R.id.nav_fb, R.id.nav_login, R.id.nav_marks, R.id.nav_mdl, R.id.nav_menu, R.id.nav_site, R.id.nav_taf};
+        for(int menuId : ids) {
+            if(menuId != id) navigationView.getMenu().findItem(menuId).setChecked(false);
+        }
         drawer.closeDrawer(GravityCompat.START);
 
         item.setChecked(true);
@@ -243,6 +259,16 @@ public class MainActivity extends AppCompatActivity
                 onNavigationItemSelected(navigationView.getMenu().findItem(R.id.nav_taf));
 
                 registerPronote(StorageUtils.getCredentials(getApplicationContext()), true);
+            }
+        });
+    }
+
+    @Override
+    public void onOwnCloudLogin() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                onNavigationItemSelected(navigationView.getMenu().findItem(R.id.nav_files));
             }
         });
     }
