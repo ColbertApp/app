@@ -1,4 +1,4 @@
-package me.fliife.colbert.ui;
+package me.fliife.colbert.ui.adapters;
 
 import android.content.Intent;
 import android.net.Uri;

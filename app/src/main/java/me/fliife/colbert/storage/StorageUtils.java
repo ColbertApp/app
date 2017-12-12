@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import com.owncloud.android.lib.common.authentication.OwnCloudCredentials;
+import com.owncloud.android.lib.common.authentication.OwnCloudCredentialsFactory;
 import me.fliife.colbert.utils.CredentialsHolder;
 import me.fliife.colbert.utils.DatabaseStructure;
 import me.fliife.colbert.utils.PronoteObject;
@@ -12,6 +14,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.*;
 import java.util.ArrayList;
 
 import static me.fliife.colbert.utils.DateUtils.isPast;
@@ -54,15 +57,30 @@ public class StorageUtils {
                 sharedPreferences.getString("url", ""));
     }
 
+    public static OwnCloudCredentials getOwnCloudCredentials(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(preferencesFile, Context.MODE_PRIVATE);
+        String username = sharedPreferences.getString("oc_username", "");
+        String password = sharedPreferences.getString("oc_password", "");
+        return OwnCloudCredentialsFactory.newBasicCredentials(username, password);
+    }
+
+    public static void saveOwnCloudCredentials(Context context, String username, String password) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(preferencesFile, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("oc_username", username);
+        editor.putString("oc_password", password);
+        editor.apply();
+    }
+
     public static boolean firstTime(Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(preferencesFile, Context.MODE_PRIVATE);
-        return sharedPreferences.getBoolean("first2", true);
+        return sharedPreferences.getBoolean("first", true);
     }
 
     public static void setFirstTime(Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(preferencesFile, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putBoolean("first2", false);
+        editor.putBoolean("first", false);
         editor.apply();
     }
 
@@ -72,18 +90,6 @@ public class StorageUtils {
         editor.remove("username");
         editor.remove("password");
         editor.remove("url");
-        editor.apply();
-    }
-
-    public static long getLastChecked(Context context) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences(preferencesFile, Context.MODE_PRIVATE);
-        return sharedPreferences.getLong("lastchecked", 0);
-    }
-
-    public static void setLastChecked(long lastChecked, Context context) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences(preferencesFile, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putLong("lastchecked", lastChecked);
         editor.apply();
     }
 
@@ -229,12 +235,26 @@ public class StorageUtils {
         database.close();
     }
 
-    public static void putJSONIntoDatabase(Context context, JSONObject jsonObject) {
-        putPronoteObjectIntoDatabase(context, jsonToPronoteObject(jsonObject));
-    }
-
     public static void clearDatabase(Context context) {
         PronoteSQLOpener pronoteSQLOpener = new PronoteSQLOpener(context);
         pronoteSQLOpener.onUpgrade(pronoteSQLOpener.getWritableDatabase(), 0, 0);
+    }
+
+    public static void copy(InputStream src, File dst) throws IOException {
+        try {
+            OutputStream out = new FileOutputStream(dst);
+            try {
+                // Transfer bytes from in to out
+                byte[] buf = new byte[1024];
+                int len;
+                while ((len = src.read(buf)) > 0) {
+                    out.write(buf, 0, len);
+                }
+            } finally {
+                out.close();
+            }
+        } finally {
+            src.close();
+        }
     }
 }

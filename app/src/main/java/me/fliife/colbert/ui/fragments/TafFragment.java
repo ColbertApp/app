@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import me.fliife.colbert.R;
 import me.fliife.colbert.storage.StorageUtils;
-import me.fliife.colbert.ui.TafAdapter;
+import me.fliife.colbert.ui.adapters.TafAdapter;
 
 public class TafFragment extends Fragment {
 

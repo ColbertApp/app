@@ -1,4 +1,4 @@
-package me.fliife.colbert.ui;
+package me.fliife.colbert.ui.adapters;
 
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;

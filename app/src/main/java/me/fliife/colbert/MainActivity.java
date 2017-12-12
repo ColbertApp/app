@@ -29,6 +29,9 @@ import me.fliife.colbert.utils.CredentialsHolder;
 import me.fliife.colbert.utils.PronoteBroadcastEventReceiver;
 import me.fliife.colbert.utils.PronoteService;
 
+import java.io.File;
+import java.io.IOException;
+
 import static me.fliife.colbert.utils.PronoteService.SERVICE_ACTION_FETCH;
 import static me.fliife.colbert.utils.PronoteService.SERVICE_ACTION_GET_FROM_DATABASE;
 
@@ -80,6 +83,12 @@ public class MainActivity extends AppCompatActivity
             navigationView.getMenu().findItem(R.id.nav_edt).setVisible(false);
             navigationView.getMenu().findItem(R.id.nav_marks).setVisible(false);
             navigationView.getMenu().findItem(R.id.nav_taf).setVisible(false);
+        }
+
+        try {
+            StorageUtils.copy(getAssets().open("knownServers_ics.bks"), new File(getFilesDir(), "knownServers.bks"));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -164,7 +173,6 @@ public class MainActivity extends AppCompatActivity
         menu.findItem(R.id.action_refresh).setVisible(false);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
@@ -188,6 +196,13 @@ public class MainActivity extends AppCompatActivity
             fragment = new EdtFragment();
         } else if (id == R.id.nav_login) {
             fragment = new PronoteLoginFragment();
+        } else if (id == R.id.nav_files) {
+            // OwnCloud
+            if(StorageUtils.getOwnCloudCredentials(this).getUsername().equals("")) {
+                fragment = new OwnCloudLoginFragment();
+            } else {
+                fragment = new OwnCloudFragment();
+            }
         } else if (id == R.id.nav_menu) {
             Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.lyceecolbert-tg.org/menu-vivre/restauration-scolaire.html"));
             startActivity(i);

@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import me.fliife.colbert.R;
 import me.fliife.colbert.storage.StorageUtils;
-import me.fliife.colbert.ui.ScheduleAdapter;
+import me.fliife.colbert.ui.adapters.ScheduleAdapter;
 
 public class EdtFragment extends Fragment {
 

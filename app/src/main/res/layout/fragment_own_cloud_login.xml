@@ -1,0 +1,85 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             tools:context="me.fliife.colbert.ui.fragments.OwnCloudLoginFragment">
+
+
+    <ImageView
+        android:id="@+id/owncloud_iv"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="35dp"
+        android:layout_marginTop="35dp"
+        android:contentDescription="Logo Owncloud "
+        app:srcCompat="@drawable/owncloud"/>
+
+    <Button
+        android:id="@+id/login_button_oc"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:background="@color/primaryColor"
+        android:text="Connexion"/>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/textInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/owncloud_iv">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/username_oc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nom d'utilisateur"
+                android:inputType="text"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/textInputLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/textInputLayout">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/password_oc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Mot de passe"
+                android:inputType="textPassword"/>
+        </android.support.design.widget.TextInputLayout>
+
+    <ProgressBar
+        android:id="@+id/login_pb_oc"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/login_button_oc"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="32dp"
+        android:indeterminate="true"
+        android:visibility="invisible"/>
+
+    <TextView
+        android:id="@+id/oc_error_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textInputLayout2"
+        android:layout_centerHorizontal="true"
+        android:text="Identifiant ou mot de passe incorrect."
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="@color/primaryColor"
+        android:visibility="invisible"/>
+</RelativeLayout>

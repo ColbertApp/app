@@ -9,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import me.fliife.colbert.storage.StorageUtils;
-import me.fliife.colbert.ui.MarkAdapter;
+import me.fliife.colbert.ui.adapters.MarkAdapter;
 
 public class MarksListDialogFragment extends BottomSheetDialogFragment {
 

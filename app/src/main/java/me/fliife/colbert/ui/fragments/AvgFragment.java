@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import me.fliife.colbert.R;
 import me.fliife.colbert.storage.StorageUtils;
-import me.fliife.colbert.ui.AvgAdapter;
+import me.fliife.colbert.ui.adapters.AvgAdapter;
 
 public class AvgFragment extends Fragment {
 

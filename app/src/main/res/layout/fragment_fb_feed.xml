@@ -4,23 +4,24 @@
              android:layout_height="match_parent"
              tools:context="me.fliife.colbert.ui.fragments.FbFeedFragment">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
         <ImageView
             android:id="@+id/fb_loader"
-            android:layout_width="match_parent"
+            android:layout_width="150dp"
             android:layout_height="150dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
             android:layout_marginBottom="10dp"
-            android:layout_marginTop="20dp"
-            android:src="@drawable/loading"/>
+            android:layout_marginTop="20dp" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/fb_rv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             />
-    </LinearLayout>
+    </RelativeLayout>
 </FrameLayout>
