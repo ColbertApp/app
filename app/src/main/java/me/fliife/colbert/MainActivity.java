@@ -1,9 +1,16 @@
 package me.fliife.colbert;
 
+import android.annotation.TargetApi;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -20,6 +27,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import com.google.firebase.database.DatabaseException;
 import com.google.firebase.database.FirebaseDatabase;
 import me.fliife.colbert.network.API;
 import me.fliife.colbert.storage.StorageUtils;
@@ -44,6 +52,7 @@ public class MainActivity extends AppCompatActivity
     private DrawerLayout drawer;
     private FloatingActionButton fab;
     private Menu menu;
+    public static String OWNCLOUD_NOTIFICATION_CHANNEL_ID = "colbert-owncloud-downloads";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +70,11 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+        try {
+            FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+        } catch (DatabaseException e) {
+            e.printStackTrace();
+        }
 
         drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -85,6 +98,10 @@ public class MainActivity extends AppCompatActivity
             navigationView.getMenu().findItem(R.id.nav_taf).setVisible(false);
         }
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            setupNotificationChannel();
+        }
+
         try {
             StorageUtils.copy(getAssets().open("knownServers_ics.bks"), new File(getFilesDir(), "knownServers.bks"));
         } catch (IOException e) {
@@ -92,8 +109,28 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
+    private void setupNotificationChannel() {
+        NotificationManager mNotificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        CharSequence name = "Owncloud Colbert";
+        String description = "Téléchargements de fichiers des dossiers personnels et/ou communs.";
+        int importance = NotificationManager.IMPORTANCE_LOW;
+        NotificationChannel mChannel = new NotificationChannel(OWNCLOUD_NOTIFICATION_CHANNEL_ID, name, importance);
+        mChannel.setDescription(description);
+        mChannel.enableLights(true);
+        mChannel.enableVibration(false);
+        mNotificationManager.createNotificationChannel(mChannel);
+    }
+
     public void doUpdate() {
         loadingSnackBar.dismiss();
+        if (navigationView.getMenu().findItem(R.id.nav_taf).isChecked())
+            onNavigationItemSelected(navigationView.getMenu().findItem(R.id.nav_taf));
+        if (navigationView.getMenu().findItem(R.id.nav_marks).isChecked())
+            onNavigationItemSelected(navigationView.getMenu().findItem(R.id.nav_marks));
+        if (navigationView.getMenu().findItem(R.id.nav_edt).isChecked())
+            onNavigationItemSelected(navigationView.getMenu().findItem(R.id.nav_edt));
     }
 
     public void registerPronote(CredentialsHolder credentials, boolean fetch) {
@@ -210,16 +247,14 @@ public class MainActivity extends AppCompatActivity
             fragment = new PronoteLoginFragment();
         } else if (id == R.id.nav_files) {
             // OwnCloud
-            if(StorageUtils.getOwnCloudCredentials(this).getUsername().equals("")) {
+            if (StorageUtils.getOwnCloudCredentials(this).getUsername().equals("")) {
                 fragment = new OwnCloudLoginFragment();
             } else {
                 showLogoutButton();
                 fragment = new OwnCloudFragment();
             }
         } else if (id == R.id.nav_menu) {
-            Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.lyceecolbert-tg.org/menu-vivre/restauration-scolaire.html"));
-            startActivity(i);
-            return false;
+            fragment = new MenuFragment();
         } else if (id == R.id.nav_site) {
             Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.lyceecolbert-tg.org/"));
             startActivity(i);
@@ -235,8 +270,8 @@ public class MainActivity extends AppCompatActivity
         getSupportActionBar().setTitle(item.getTitle());
 
         int[] ids = {R.id.nav_files, R.id.nav_edt, R.id.nav_fb, R.id.nav_login, R.id.nav_marks, R.id.nav_mdl, R.id.nav_menu, R.id.nav_site, R.id.nav_taf};
-        for(int menuId : ids) {
-            if(menuId != id) navigationView.getMenu().findItem(menuId).setChecked(false);
+        for (int menuId : ids) {
+            if (menuId != id) navigationView.getMenu().findItem(menuId).setChecked(false);
         }
         drawer.closeDrawer(GravityCompat.START);
 

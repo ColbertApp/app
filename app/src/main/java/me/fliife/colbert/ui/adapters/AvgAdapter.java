@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import me.fliife.colbert.MarksListDialogFragment;
+import me.fliife.colbert.ui.fragments.MarksListDialogFragment;
 import me.fliife.colbert.R;
 import me.fliife.colbert.utils.PronoteObject;
 import org.apache.commons.lang3.StringEscapeUtils;

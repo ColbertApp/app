@@ -1,46 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:orientation="vertical">
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_mdl"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentStart="true"
+    android:layout_marginBottom="8dp"
+    android:clickable="true"
+    android:elevation="2dp"
+    android:foreground="?attr/selectableItemBackground"
+    android:longClickable="true"
+    android:stateListAnimator="@animator/touch_rise_item"
+    android:transitionName="card"
+    app:contentPadding="16dp">
 
-    <android.support.v7.widget.CardView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:cardElevation="2dp"
-        app:contentPadding="8dp">
+        android:layout_height="match_parent">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/mdl_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentStart="false"
+            android:layout_alignParentTop="false"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+            tools:text="Titre"/>
 
-            <TextView
-                android:id="@+id/mdl_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-                tools:text="Titre"/>
+        <TextView
+            android:id="@+id/mdl_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentStart="false"
+            android:layout_alignParentTop="false"
+            android:layout_below="@+id/mdl_title"
+            android:layout_marginTop="8dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tempus volutpat pretium. Vestibulum nunc metus, tincidunt vel viverra eget, volutpat sed risus. Suspendisse faucibus, nibh in fermentum tempor, mauris nunc mollis sem, ut malesuada augue metus non odio. Mauris blandit dolor non odio faucibus rhoncus. Fusce non purus et nulla vulputate convallis eu eget dolor. Vestibulum facilisis enim vel mi ornare, in luctus erat laoreet. Vestibulum tempor dui at dui facilisis, at lobortis quam fermentum. Sed sit amet aliquam neque. Phasellus elementum justo et elit vestibulum, eu mollis ligula feugiat. Quisque et turpis id leo dapibus viverra. Curabitur sed eleifend velit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce eu fermentum nibh. Etiam faucibus ipsum non neque rutrum tincidunt."/>
 
-            <TextView
-                android:id="@+id/mdl_content"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/mdl_title"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                tools:text="Contenu"/>
+        <TextView
+            android:id="@+id/mdl_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/mdl_content"
+            tools:text="Le 05/12/2017"/>
+    </RelativeLayout>
+</android.support.v7.widget.CardView>
 
-            <TextView
-                android:id="@+id/mdl_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_below="@+id/mdl_content"
-                tools:text="Le 05/12/2017"/>
-
-        </RelativeLayout>
-
-    </android.support.v7.widget.CardView>
-</LinearLayout>
